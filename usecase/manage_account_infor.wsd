@@ -1,0 +1,26 @@
+@startuml manage_account_infor
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Chủ phương tiện" as VehicleOwner
+
+rectangle "Quản lý thông tin tài khoản, vé đỗ xe, bãi đỗ yêu thích và điểm thưởng" as ManageAccountInfor {
+  'VehicleOwner'
+    VehicleOwner -- (Xem thông tin tài khoản)
+    VehicleOwner -- (Cập nhật thông tin tài khoản)
+    VehicleOwner -- (Đổi mật khẩu)
+    VehicleOwner -- (Quên mật khẩu)
+    VehicleOwner -- (Xóa tài khoản)
+    VehicleOwner -- (Xem lịch sử đặt vé)
+    VehicleOwner -- (Xem lịch sử thanh toán)
+    VehicleOwner -- (Xem lịch sử điểm thưởng)
+    VehicleOwner -- (Tìm kiếm bãi đỗ yêu thích)
+    VehicleOwner -- (Thêm bãi đỗ yêu thích)
+    VehicleOwner -- (Xóa bãi đỗ yêu thích)
+    VehicleOwner -- (Tim kiếm vé đỗ xe)
+    VehicleOwner -- (Xem chi tiết vé đỗ xe)
+    VehicleOwner -- (Nhận điểm thưởng)
+}
+
+@enduml

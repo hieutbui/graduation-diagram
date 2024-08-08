@@ -1,0 +1,32 @@
+@startuml general
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Người quản trị" as Admin
+actor "Chủ phương tiện" as VehicleOwner
+actor "Nhân viên bãi đỗ" as ParkingStaff
+actor "Chủ bãi đỗ" as ParkingOwner
+
+rectangle "Tổng quan" as GeneralDiagram {
+  'Admin'
+    Admin -- (Quản lý thông tin các bãi đỗ)
+    Admin -- (Quản lý thông tin người dùng và chính sách)
+    Admin -- (Xuất dữ liệu)
+    Admin -- (Nhận/Gửi phản hồi và thông báo)
+  'ParkingStaff'
+    (Quản lý thông tin bãi đỗ hiện tại) -- ParkingStaff
+    (Tìm kiếm và kiểm tra vé đỗ xe) -- ParkingStaff
+  'ParkingOwner'
+    (Quản lý thông tin bãi đỗ, nhân viên và chính sách) -- ParkingOwner
+    (Quản lý thông tin bãi đỗ hiện tại) -- ParkingOwner
+    (Tìm kiếm và kiểm tra vé đỗ xe) -- ParkingOwner
+    (Xuất dữ liệu) -- ParkingOwner
+    (Nhận/Gửi phản hồi và thông báo) -- ParkingOwner
+  'VehicleOwner'
+    (Quản lý thông tin tài khoản, vé đỗ xe, bãi đỗ yêu thích và điểm thưởng) -- VehicleOwner
+    (Đặt, hủy và thanh toán vé đỗ xe) -- VehicleOwner
+    (Tìm kiếm bãi đỗ và vé đỗ xe) -- VehicleOwner
+    (Nhận/Gửi phản hồi và thông báo) - VehicleOwner
+}
+@enduml

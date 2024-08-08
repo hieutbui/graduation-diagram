@@ -1,0 +1,18 @@
+@startuml manage_parking_employee_policy
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Chủ bãi đỗ" as ParkingOwner
+
+rectangle "Quản lý thông tin bãi đỗ, nhân viên và chính sách" as ManageParkingEmployeePolicy {
+  'ParkingOwner'
+    ParkingOwner -- (Xem danh sách nhân viên, chính sách)
+    ParkingOwner -- (Xem thông tin bãi đỗ, nhân viên, chính sách)
+    ParkingOwner -- (Cập nhật thông tin bãi đỗ nhân viên, chính sách)
+    ParkingOwner -- (Tìm kiếm nhân viên, chính sách)
+    ParkingOwner -- (Thêm nhân viên, chính sách)
+    ParkingOwner -- (Xóa nhân viên, chính sách)
+}
+
+@enduml

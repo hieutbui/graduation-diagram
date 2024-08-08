@@ -1,0 +1,16 @@
+@startuml find_parking_and_tickets
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Chủ phương tiện" as VehicleOwner
+
+rectangle "Tìm kiếm bãi đỗ và vé đỗ xe" as FindParkingAndTickets {
+  'VehicleOwner'
+    VehicleOwner -- (Tìm kiếm bãi đỗ)
+    VehicleOwner -- (Tìm kiếm vé đỗ xe)
+    VehicleOwner -- (Xem chi tiết bãi đỗ)
+    VehicleOwner -- (Xem chi tiết vé đỗ xe)
+}
+
+@enduml

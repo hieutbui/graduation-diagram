@@ -1,0 +1,20 @@
+@startuml find_and_check_tickets
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Chủ bãi đỗ" as ParkingOwner
+actor "Nhân viên bãi đỗ" as ParkingEmployee
+
+rectangle "Tìm kiếm và kiểm tra vé đỗ xe" as FindAndCheckTickets {
+  'ParkingOwner'
+    ParkingOwner -- (Tìm kiếm vé đỗ xe)
+    ParkingOwner -- (Kiểm tra vé đỗ xe)
+    ParkingOwner -- (Xem chi tiết vé đỗ xe)
+  'ParkingEmployee'
+    (Tìm kiếm vé đỗ xe) -- ParkingEmployee
+    (Kiểm tra vé đỗ xe) -- ParkingEmployee
+    (Xem chi tiết vé đỗ xe) -- ParkingEmployee
+}
+
+@enduml

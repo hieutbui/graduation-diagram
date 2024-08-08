@@ -1,0 +1,17 @@
+@startuml manage_parkings
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Người quản trị" as Admin
+
+rectangle "Quản lý thông tin các bãi đỗ" as ManageParkings {
+  'Admin'
+    Admin -- (Thêm bãi đỗ)
+    Admin -- (Cập nhật thông tin bãi đỗ)
+    Admin -- (Xóa bãi đỗ)
+    Admin -- (Xem danh sách bãi đỗ)
+    Admin -- (Tìm kiếm bãi đỗ)
+    Admin -- (Xem chi tiết bãi đỗ)
+}
+@enduml

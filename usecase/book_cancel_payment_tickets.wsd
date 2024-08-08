@@ -1,0 +1,17 @@
+@startuml book_cancel_payment_tickets
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Chủ phương tiện" as VehicleOwner
+
+rectangle "Đặt, hủy và thanh toán vé đỗ xe" as BookCancelPaymentTickets {
+  'VehicleOwner'
+    VehicleOwner -- (Đặt vé đỗ xe)
+    VehicleOwner -- (Hủy vé đỗ xe)
+    VehicleOwner -- (Thanh toán vé đỗ xe)
+    VehicleOwner -- (Mua thêm thời gian đỗ xe)
+    VehicleOwner -- (Xem chi tiết vé đỗ xe)
+}
+
+@enduml

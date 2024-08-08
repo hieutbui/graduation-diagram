@@ -1,0 +1,20 @@
+@startuml export_data
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Người quản trị" as Admin
+actor "Chủ bãi đỗ" as ParkingOwner
+
+rectangle "Xuất dữ liệu" as ExportData {
+  'Admin'
+    Admin -- (Xuất danh sách người dùng, chính sách, bãi đỗ, vé)
+    Admin -- (Xuất thông tin đặt vé)
+    Admin -- (Xuất dữ liệu phản hồi)
+  'ParkingOwner'
+    (Xuất danh sách người dùng, chính sách, bãi đỗ, vé) -- ParkingOwner
+    (Xuất thông tin đặt vé) -- ParkingOwner
+    (Xuất dữ liệu phản hồi) -- ParkingOwner
+}
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml receive_reply_feedback_and_notification
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Người quản trị" as Admin
+actor "Chủ phương tiện" as VehicleOwner
+actor "Chủ bãi đỗ" as ParkingOwner
+
+rectangle "Nhận/Gửi phản hồi và thông báo" as ReceiveReplyFeedbackAndNotification {
+  'Admin'
+    Admin -- (Nhận phản hồi)
+    Admin -- (Gửi thông báo)
+  'VehicleOwner'
+    (Gửi phản hồi) -- VehicleOwner
+    (Nhận thông báo) -- VehicleOwner
+  'ParkingOwner'
+    (Gửi phản hồi) -- ParkingOwner
+    (Nhận thông báo) -- ParkingOwner
+}
+
+@enduml

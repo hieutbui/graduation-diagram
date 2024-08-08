@@ -1,0 +1,19 @@
+@startuml manage_user_and_policies
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Người quản trị" as Admin
+
+rectangle "Quản lý thông tin người dùng và chính sách" as ManageUserAndPolicies {
+  'Admin'
+    Admin -- (Xem danh sách người dùng, chính sách)
+    Admin -- (Xem chi tiết người dùng, chính sách)
+    Admin -- (Xem thông tin đặt vé)
+    Admin -- (Tìm kiếm người dùng, chính sách, vé)
+    Admin -- (Thêm chính sách)
+    Admin -- (Cập nhật chính sách)
+    Admin -- (Xóa chính sách)
+}
+
+@enduml

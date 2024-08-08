@@ -1,0 +1,25 @@
+@startuml manage_parking_current_info
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Chủ bãi đỗ" as ParkingOwner
+actor "Nhân viên bãi đỗ" as ParkingEmployee
+
+rectangle "Quản lý thông tin hiện tại của bãi đỗ" as ManageParkingCurrentInfo {
+  'ParkingOwner'
+    ParkingOwner -- (Xem thông tin hiện tại của bãi đỗ)
+    ParkingOwner -- (Xem danh sách nhân viên đang làm việc)
+    ParkingOwner -- (Xem danh sách xe đỗ)
+    ParkingOwner -- (Xem danh sách vé đỗ)
+    ParkingOwner -- (Xem danh sách thông tin đặt vé)
+    ParkingOwner -- (Xem danh thông tin phân tích)
+  'ParkingEmployee'
+    (Xem thông tin hiện tại của bãi đỗ) -- ParkingEmployee
+    (Xem danh sách xe đỗ) -- ParkingEmployee
+    (Xem danh sách vé đỗ) -- ParkingEmployee
+    (Xem danh sách thông tin đặt vé) -- ParkingEmployee
+    (Xem danh sách thông tin phân tích) -- ParkingEmployee
+}
+
+@enduml
