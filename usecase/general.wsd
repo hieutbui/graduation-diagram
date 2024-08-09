@@ -24,7 +24,7 @@ rectangle "Tổng quan" as GeneralDiagram {
     (Xuất dữ liệu) -- ParkingOwner
     (Nhận/Gửi phản hồi và thông báo) -- ParkingOwner
   'VehicleOwner'
-    (Quản lý thông tin tài khoản, vé đỗ xevà bãi đỗ yêu thích) -- VehicleOwner
+    (Quản lý thông tin tài khoản, vé đỗ xe và bãi đỗ yêu thích) -- VehicleOwner
     (Đặt, hủy và thanh toán vé đỗ xe) -- VehicleOwner
     (Tìm kiếm bãi đỗ và vé đỗ xe) -- VehicleOwner
     (Nhận/Gửi phản hồi và thông báo) - VehicleOwner
