@@ -4,9 +4,12 @@ start
 :Tìm kiếm bãi đỗ;
 :Chọn bãi đỗ;
 :Đặt vé đỗ xe;
+:Chọn phương thức thanh toán;
 
 |Hệ thống|
 :Xác nhận thông tin;
+:Cập nhật tình trạng bãi đỗ;
+:Gửi thông báo đã đặt vé;
 
 |Chủ phương tiện|
 :Di chuyển đến bãi đỗ;
