@@ -1,0 +1,20 @@
+@startuml register_parking
+|Chủ bãi đỗ|
+start
+:Đăng ký tài khoản bãi đỗ;
+:Điền thông tin;
+|Hệ thống|
+:Kiểm tra thông tin;
+if (Hợp lệ?) then (không)
+  :Gửi thông báo đăng ký thất bại;
+else (có)
+  :Gửi thông báo đăng ký thành công;
+  :Cập nhật thông tin;
+  :Gửi thông tin đến Người quản trị;
+  |Người quản trị|
+  :Kiểm tra thông tin;
+  if (Hợp lệ?) then (có)
+    :Thêm vào danh sách bãi đỗ;
+  else (không)
+    :Liên hệ xác minh thông tin;
+endif

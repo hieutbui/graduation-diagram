@@ -1,0 +1,29 @@
+@startuml parking
+|Chủ phương tiện|
+start
+:Tìm kiếm bãi đỗ;
+:Chọn bãi đỗ;
+:Đặt vé đỗ xe;
+
+|Hệ thống|
+:Xác nhận thông tin;
+
+|Chủ phương tiện|
+:Di chuyển đến bãi đỗ;
+
+|Chủ/Nhân viên bãi đỗ|
+:Kiểm tra vé đỗ xe;
+if (Vé hợp lệ?) then (có)
+  :Mở cổng;
+  |Hệ thống|
+  :Cập nhật thông tin;
+  :Gửi thông báo đã vào bãi đỗ;
+else (không)
+  |Chủ/Nhân viên bãi đỗ|
+  :Không cho phép vào;
+endif
+
+:Hỗ trợ nếu cần thiết;
+
+stop
+@enduml
