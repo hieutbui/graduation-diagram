@@ -10,7 +10,7 @@ rectangle "Đặt, hủy và thanh toán vé đỗ xe" as BookCancelPaymentTicke
     VehicleOwner -- (Đặt vé đỗ xe)
     VehicleOwner -- (Hủy vé đỗ xe)
     VehicleOwner -- (Thanh toán vé đỗ xe)
-    VehicleOwner -- (Mua thêm thời gian đỗ xe)
+    VehicleOwner -- (Gia hạn thời gian đỗ xe)
     VehicleOwner -- (Xem chi tiết vé đỗ xe)
 }
 
