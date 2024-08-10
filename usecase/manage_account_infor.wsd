@@ -5,16 +5,14 @@ skinparam packageStyle rect
 
 actor "Chủ phương tiện" as VehicleOwner
 
-rectangle "Quản lý thông tin tài khoản, vé đỗ xe và bãi đỗ yêu thích" as ManageAccountInfor {
+rectangle "Quản lý thông tin tài khoản và bãi đỗ yêu thích" as ManageAccountInfor {
   'VehicleOwner'
     VehicleOwner -- (Xem thông tin tài khoản)
     VehicleOwner -- (Cập nhật thông tin tài khoản)
     VehicleOwner -- (Đổi mật khẩu)
     VehicleOwner -- (Quên mật khẩu)
     VehicleOwner -- (Xóa tài khoản)
-    VehicleOwner -- (Xem lịch sử đặt vé, thanh toán)
-    VehicleOwner -- (Xem chi tiết vé đỗ xe)
-    VehicleOwner -- (Tìm kiếm vé đỗ xe, bãi đỗ yêu thích)
+    VehicleOwner -- (Tìm kiếm bãi đỗ yêu thích)
     VehicleOwner -- (Thêm bãi đỗ yêu thích)
     VehicleOwner -- (Xóa bãi đỗ yêu thích)
 }
