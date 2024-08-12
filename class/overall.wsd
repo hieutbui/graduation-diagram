@@ -1,0 +1,78 @@
+@startuml class_overall
+
+class Account {
+  -id: UUID : PK
+  -account_type: AccountType
+  -password: String
+  -email: String
+  -name: String
+  -phone: String
+  -username: String?
+  -avatar: String?
+  -gender: Gender?
+  -date_of_birth: Date?
+  -created_at: Timestamp
+  -updated_at: Timestamp
+}
+
+class Parking {
+  -id: UUID : PK
+  -owner_id: UUID : FK
+  -employees: UUID[ ]
+  -parking_name: String
+  -address: String
+  -latitude: Double
+  -longitude: Double
+  -total_slot: Integer
+  -available_slot: Integer
+  -price_per_hour: ShiftPrice[ ]
+  -price_per_day: Double?
+  -price_per_month: Double?
+  -price_per_year: Double?
+  -created_at: Timestamp
+  -updated_at: Timestamp
+}
+
+class Ticket {
+  -id: UUID : PK
+  -parking_id: UUID : FK
+  -user_id: UUID : FK
+  -vehicle_id: UUID : FK
+  -payment_id: UUID : FK
+  -ticket_status: TicketStatus
+  -start_time: Timestamp
+  -end_time: Timestamp
+  -extra_time: Integer
+  -expired: Boolean
+  -created_at: Timestamp
+  -updated_at: Timestamp
+}
+
+class Notification {
+  -id: UUID : PK
+  -user_id: UUID : FK
+  -notification_type: NotificationType
+  -notification_status: NotificationStatus
+  -message: String
+  -created_at: Timestamp
+  -updated_at: Timestamp
+}
+
+class Feedback {
+  -id: UUID : PK
+  -user_id: UUID : FK
+  -feedback_type: FeedbackType
+  -feedback_status: FeedbackStatus
+  -message: String
+  -created_at: Timestamp
+  -updated_at: Timestamp
+}
+
+Account --{ Ticket
+Account -left-{ Notification
+Account --{ Feedback
+Account -right-{ Parking
+
+Parking --{ Ticket
+
+@enduml

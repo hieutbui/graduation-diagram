@@ -1,0 +1,62 @@
+@startuml class_account
+
+class Account {
+  -id: UUID : PK
+  -account_type: AccountType
+  -password: String
+  -email: String
+  -name: String
+  -phone: String
+  -username: String?
+  -avatar: String?
+  -gender: Gender?
+  -date_of_birth: Date?
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findAccountById(id: UUID): Account
+  +login(\n   username: String, \n   password: String\n): Account
+  +logout(id: UUID): Boolean
+  +register(account: Account): Account
+  +update(account: Account): Account
+  +delete(id: UUID): Boolean
+  +forgotPassword(email: String): Boolean
+}
+
+class User {
+  -user_id: UUID : PK
+  -account_id: UUID : FK
+}
+
+class Admin {
+  -admin_id: UUID : PK
+  -account_id: UUID : FK
+}
+
+class ParkingEmployee {
+  -employee_id: UUID : PK
+  -account_id: UUID : FK
+  -parking_id: UUID : FK
+  -working_status: WorkingStatus
+  -labor_type: LaborType
+  -shift_start: Timestamp
+  -shift_end: Timestamp
+  -salary: Double
+  +findEmployeeByParkingId(\n   parking_id: UUID\n): ParkingEmployee
+  +updateEmployee(\n   employee: ParkingEmployee\n): ParkingEmployee
+}
+
+class ParkingOwner {
+  -owner_id: UUID : PK
+  -account_id: UUID : FK
+  -parking_id: UUID[ ]
+  -business_name: String
+  +findOwnerByParkingId(\n   parking_id: UUID\n): ParkingOwner
+}
+
+Account <|-- User : Inheritance
+Account <|-- Admin : Inheritance
+Account <|-left- ParkingEmployee : Inheritance
+Account <|-- ParkingOwner : Inheritance
+
+@enduml

@@ -1,0 +1,45 @@
+@startuml class_parking
+
+class Parking {
+  -id: UUID : PK
+  -owner_id: UUID : FK
+  -employees: UUID[ ]
+  -parking_name: String
+  -address: String
+  -latitude: Double
+  -longitude: Double
+  -total_slot: Integer
+  -available_slot: Integer
+  -price_per_hour: ShiftPrice[ ]
+  -price_per_day: Double?
+  -price_per_month: Double?
+  -price_per_year: Double?
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findParkingById(id: UUID): Parking
+  +findParkingByLocation(\n   latitude: Double, \n   longitude: Double\n): Parking
+  +updateParking(parking: Parking): Parking
+  +deleteParking(id: UUID): Boolean
+  +createParking(parking: Parking): Parking
+}
+
+class ShiftPrice {
+  -shift_price_id: UUID : PK
+  -parking_id: UUID : FK
+  -shift_type: ShiftType
+  -shift_name: String
+  -shift_start: Timestamp
+  -shift_end: Timestamp
+  -price: Double
+  -created_at: Timestamp
+  -updated_at: Timestamp
+  +findShiftPriceByParkingId(\n   parking_id: UUID\n): ShiftPrice
+  +updateShiftPrice(\n   shift_price: ShiftPrice\n): ShiftPrice
+  +createShiftPrice(\n   shift_price: ShiftPrice\n): ShiftPrice
+  +deleteShiftPrice(\n   shift_price_id: UUID\n): Boolean
+}
+
+Parking "1"-right-"n" ShiftPrice : Composition
+
+@enduml

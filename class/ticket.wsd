@@ -1,0 +1,66 @@
+@startuml class_ticket
+
+class Ticket {
+  -id: UUID : PK
+  -parking_id: UUID : FK
+  -user_id: UUID : FK
+  -vehicle_id: UUID : FK
+  -payment_id: UUID : FK
+  -ticket_status: TicketStatus
+  -start_time: Timestamp
+  -end_time: Timestamp
+  -extra_time: Integer
+  -expired: Boolean
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findTicketById(id: UUID): Ticket
+  +findTicketByUserId(id: UUID): Ticket
+  +findTicketByParkingId(id: UUID): Ticket
+  +findTicketByVehicleId(id: UUID): Ticket
+  +findTicketByPaymentId(id: UUID): Ticket
+  +updateTicket(ticket: Ticket): Ticket
+  +deleteTicket(id: UUID): Boolean
+  +createTicket(ticket: Ticket): Ticket
+  +addExtraTime(id: UUID, extra_time: Timestamp): Ticket
+  +payTicket(id: UUID, payment_id: UUID): Ticket
+  +cancelTicket(id: UUID): Boolean
+}
+
+class Vehicle {
+  -vehicle_id: UUID : PK
+  -user_id: UUID : FK
+  -vehicle_type: VehicleType
+  -license_plate: String
+  -brand: String
+  -model: String
+  -color: String
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findVehicleById(id: UUID): Vehicle
+  +updateVehicle(vehicle: Vehicle): Vehicle
+  +deleteVehicle(id: UUID): Boolean
+  +createVehicle(vehicle: Vehicle): Vehicle
+}
+
+class Payment {
+  -payment_id: UUID : PK
+  -ticket_id: UUID : FK
+  -payment_type: PaymentType
+  -payment_status: PaymentStatus
+  -fees: Double
+  -amount: Double
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findPaymentById(id: UUID): Payment
+  +updatePayment(payment: Payment): Payment
+  +deletePayment(id: UUID): Boolean
+  +createPayment(payment: Payment): Payment
+}
+
+Ticket "1"-right-"1" Vehicle : Composition
+Ticket "1"-down-"1" Payment : Composition
+
+@enduml
