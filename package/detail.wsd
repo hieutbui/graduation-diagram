@@ -4,77 +4,72 @@ skinparam Linetype ortho
 
 package "pkg" {
   package "Controller" {
-    class "User Controller" as UserController
+    class "Account Controller" as AccountController
     class "Parking Controller" as ParkingController
     class "Payment Controller" as PaymentController
     class "Notification Controller" as NotificationController
     class "Feedback Controller" as FeedbackController
-    class "Admin Controller" as AdminController
     class "Booking Controller" as BookingController
   }
 
   package "Service" {
-    class "User Service" as UserService
+    class "Account Service" as AccountService
     class "Parking Service" as ParkingService
     class "Payment Service" as PaymentService
     class "MongoDB Service" as MongoDBService
-    class "Admin Service" as AdminService
     class "Booking Service" as BookingService
   }
 
   package "Repository" {
-    class "User Repository" as UserRepository
+    class "Account Repository" as AccountRepository
     class "Parking Repository" as ParkingRepository
     class "Payment Repository" as PaymentRepository
     class "Notification Repository" as NotificationRepository
     class "Feedback Repository" as FeedbackRepository
-    class "Admin Repository" as AdminRepository
     class "Ticket Repository" as TicketRepository
   }
 
   package "Model" {
-    class "User" as User
+    class "Account" as Account
     class "Parking" as Parking
     class "Payment" as Payment
     class "Notification" as Notification
     class "Feedback" as Feedback
-    class "Admin" as Admin
     class "Ticket" as Ticket
   }
 
-  UserController o-- UserService
+  AccountController o-- AccountService
+  FeedbackController o-- AccountService
+  BookingController o-- AccountService
+  NotificationController o-- AccountService
+  PaymentController o-- AccountService
+
   ParkingController o-- ParkingService
+  BookingController o-- ParkingService
+
   PaymentController o-- PaymentService
+  BookingController o-- PaymentService
+
   NotificationController o-- MongoDBService
   FeedbackController o-- MongoDBService
-  FeedbackController o-- UserService
-  FeedbackController o-- ParkingService
-  FeedbackController o-- AdminService
-  AdminController o-- AdminService
+  
   BookingController o-- BookingService
-  BookingController o-- ParkingService
-  BookingController o-- PaymentService
-  BookingController o-- UserService
-  BookingController o-- MongoDBService
+  
+  
+  
 
-  UserService o-- UserRepository
+  AccountService o-- AccountRepository
   ParkingService o-- ParkingRepository
   PaymentService o-- PaymentRepository
   MongoDBService o-- NotificationRepository
   MongoDBService o-- FeedbackRepository
-  AdminService o-- AdminRepository
   BookingService o-- TicketRepository
-  AdminService -left- MongoDBService
-  UserService -left- MongoDBService
-  ParkingService -left- MongoDBService
-  BookingService -left- MongoDBService
 
-  UserRepository *-- User
+  AccountRepository *-- Account
   ParkingRepository *-- Parking
   PaymentRepository *-- Payment
   NotificationRepository *-- Notification
   FeedbackRepository *-- Feedback
-  AdminRepository *-- Admin
   TicketRepository *-- Ticket
 }
 
