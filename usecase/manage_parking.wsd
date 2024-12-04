@@ -1,0 +1,21 @@
+@startuml manage_parking
+
+left to right direction
+skinparam packageStyle rect
+
+actor "Chủ bãi đỗ" as ParkingOwner
+actor "Nhân viên bãi đỗ" as ParkingEmployee
+
+rectangle "Quản lý thông tin bãi đỗ xe" as ManageParking {
+  'ParkingOwner'
+  ParkingOwner -- (Xem thông tin bãi đỗ)
+  ParkingOwner -- (Tìm kiếm thông tin bãi đỗ)
+  ParkingOwner -- (Thêm nhân viên, chính sách)
+  ParkingOwner -- (Xóa nhân viên, chính sách)
+
+  'ParkingEmployee'
+  (Xem thông tin bãi đỗ) -- ParkingEmployee
+  (Tìm kiếm thông tin bãi đỗ) -- ParkingEmployee
+}
+
+@enduml
