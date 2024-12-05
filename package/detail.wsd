@@ -1,76 +1,138 @@
 @startuml package_detail
 
 skinparam Linetype ortho
-
-package "pkg" {
-  package "Controller" {
-    class "Account Controller" as AccountController
-    class "Parking Controller" as ParkingController
-    class "Payment Controller" as PaymentController
-    class "Notification Controller" as NotificationController
-    class "Feedback Controller" as FeedbackController
-    class "Booking Controller" as BookingController
-  }
-
-  package "Service" {
-    class "Account Service" as AccountService
-    class "Parking Service" as ParkingService
-    class "Payment Service" as PaymentService
-    class "MongoDB Service" as MongoDBService
-    class "Booking Service" as BookingService
-  }
-
-  package "Repository" {
-    class "Account Repository" as AccountRepository
-    class "Parking Repository" as ParkingRepository
-    class "Payment Repository" as PaymentRepository
-    class "Notification Repository" as NotificationRepository
-    class "Feedback Repository" as FeedbackRepository
-    class "Ticket Repository" as TicketRepository
-  }
-
-  package "Model" {
-    class "Account" as Account
-    class "Parking" as Parking
-    class "Payment" as Payment
-    class "Notification" as Notification
-    class "Feedback" as Feedback
-    class "Ticket" as Ticket
-  }
-
-  AccountController o-- AccountService
-  FeedbackController o-- AccountService
-  BookingController o-- AccountService
-  NotificationController o-- AccountService
-  PaymentController o-- AccountService
-
-  ParkingController o-- ParkingService
-  BookingController o-- ParkingService
-
-  PaymentController o-- PaymentService
-  BookingController o-- PaymentService
-
-  NotificationController o-- MongoDBService
-  FeedbackController o-- MongoDBService
-  
-  BookingController o-- BookingService
-  
-  
-  
-
-  AccountService o-- AccountRepository
-  ParkingService o-- ParkingRepository
-  PaymentService o-- PaymentRepository
-  MongoDBService o-- NotificationRepository
-  MongoDBService o-- FeedbackRepository
-  BookingService o-- TicketRepository
-
-  AccountRepository *-- Account
-  ParkingRepository *-- Parking
-  PaymentRepository *-- Payment
-  NotificationRepository *-- Notification
-  FeedbackRepository *-- Feedback
-  TicketRepository *-- Ticket
+skinparam note {
+  FontSize 22
+  FontWeight light
 }
+skinparam class {
+  FontSize 28
+  FontWeight light
+}
+skinparam package {
+  FontSize 18
+  FontWeight light
+}
+skinparam {
+  Ranksep 15
+  Nodesep 20
+}
+
+package "Home View" {
+  class "ValueListenableBuilder" as ValueListenableBuilder
+  class "FlutterMap" as FlutterMap
+  class "TileLayer" as TileLayer
+  class "MarkerLayer" as MarkerLayer
+  class "Marker" as Marker
+}
+
+package "Home Controller" {
+  class "MapController" as MapController
+  class "StreamSubscription" as StreamSubscription
+  class "ValueNotifier" as ValueNotifier
+}
+
+package "Service" {
+  class "Parking Service" as ParkingService
+}
+
+package "Interactor" {
+  class "CurrentLocationInteractor" as CurrentLocationInteractor
+  class "FindNearbyParkingInteractor" as FindNearbyParkingInteractor
+}
+
+package "Repository" {
+  class "ParkingRepository" as ParkingRepository
+  class "CurrentLocationRepository" as CurrentLocationRepository
+}
+
+package "Repository Impl" {
+  class "ParkingRepositoryImpl" as ParkingRepositoryImpl
+  class "CurrentLocationRepositoryImpl" as CurrentLocationRepositoryImpl
+}
+
+package "Data Source" {
+  class "ParkingDataSource" as ParkingDataSource
+  class "CurrentLocationDataSource" as CurrentLocationDataSource
+}
+
+package "Data Source Impl" {
+  class "ParkingDataSourceImpl" as ParkingDataSourceImpl
+  class "CurrentLocationDataSourceImpl" as CurrentLocationDataSourceImpl
+}
+
+package "Model" {
+  abstract class "1" as FindNearbyParkingsState
+  class "2" as FindNearbyParkingsInitial
+  class "3" as FindNearbyParkingsLoading
+  class "4" as FindNearbyParkingsSuccess
+  class "5" as FindNearbyParkingsIsEmpty
+  class "6" as FindNearbyParkingsFailure
+  abstract class "7" as GetCurrentLocationState
+  class "8" as GetCurrentLocationInitial
+  class "9" as GetCurrentLocationSuccess
+  class "10" as GetCurrentLocationFailure
+  class "11" as GetCurrentLocationIsEmpty
+}
+
+note top of Model
+  1: FindNearbyParkingsState
+  2: FindNearbyParkingsInitial
+  3: FindNearbyParkingsLoading
+  4: FindNearbyParkingsSuccess
+  5: FindNearbyParkingsIsEmpty
+  6: FindNearbyParkingsFailure
+  7: GetCurrentLocationState
+  8: GetCurrentLocationInitial
+  9: GetCurrentLocationSuccess
+  10: GetCurrentLocationFailure
+  11: GetCurrentLocationIsEmpty
+end note
+
+FlutterMap *-- MapController
+FlutterMap *-- TileLayer
+FlutterMap *-- MarkerLayer
+FlutterMap *-- ValueListenableBuilder
+
+ValueListenableBuilder *-- Marker
+
+MarkerLayer *-- Marker
+
+Marker *-- ValueNotifier
+
+Marker -- ParkingService
+
+ValueNotifier -- StreamSubscription
+
+StreamSubscription -- FindNearbyParkingInteractor
+StreamSubscription -- CurrentLocationInteractor
+
+ValueNotifier -- FindNearbyParkingInteractor
+ValueNotifier -- CurrentLocationInteractor
+
+FindNearbyParkingInteractor *-- FindNearbyParkingsState
+CurrentLocationInteractor *-- GetCurrentLocationState
+
+FindNearbyParkingInteractor *-- ParkingRepository
+CurrentLocationInteractor *-- CurrentLocationRepository
+
+ParkingRepository <|-- ParkingRepositoryImpl
+CurrentLocationRepository <|-- CurrentLocationRepositoryImpl
+
+ParkingRepositoryImpl *-- ParkingDataSource
+CurrentLocationRepositoryImpl *-- CurrentLocationDataSource
+
+ParkingDataSource <|-- ParkingDataSourceImpl
+CurrentLocationDataSource <|-- CurrentLocationDataSourceImpl
+
+FindNearbyParkingsState <|.down. FindNearbyParkingsInitial
+FindNearbyParkingsState <|.down. FindNearbyParkingsLoading
+FindNearbyParkingsState <|.down.. FindNearbyParkingsSuccess
+FindNearbyParkingsState <|.down.. FindNearbyParkingsIsEmpty
+FindNearbyParkingsState <|.down.. FindNearbyParkingsFailure
+GetCurrentLocationState <|.down. GetCurrentLocationInitial
+GetCurrentLocationState <|.down. GetCurrentLocationSuccess
+GetCurrentLocationState <|.down.. GetCurrentLocationFailure
+GetCurrentLocationState <|.down.. GetCurrentLocationIsEmpty
 
 @enduml
