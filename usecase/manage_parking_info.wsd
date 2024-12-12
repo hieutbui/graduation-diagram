@@ -13,7 +13,7 @@ rectangle "Quản lý thông tin bãi đỗ xe" as ManageParkingInfo {
     ParkingOwner -- (Xem thông tin xe đỗ và thông tin vé)
     ParkingOwner -- (Phân tích tình trạng bãi đỗ)
     ParkingOwner -- (Tìm kiếm thông tin của bãi đỗ)
-    ParkingOwner -- (Thêm, sửa , xóa nhân viên, chính sách)
+    ParkingOwner -- (Thêm, sửa , xóa nhân viên)
   'ParkingEmployee'
     (Xem thông tin bãi đỗ) -- ParkingEmployee
     (Xem thông tin xe đỗ và thông tin vé) -- ParkingEmployee
