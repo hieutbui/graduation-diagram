@@ -1,0 +1,40 @@
+@startuml scan_qr_user
+
+skinparam {
+  ArrowFontSize 18
+}
+
+actor "Chủ phương tiện" as VehicleOwner
+boundary "TicketDetailsView" as TicketDetailsView
+boundary "ScanQRView" as ScanQRView
+control "TicketDetailsController" as TicketDetailsController
+control "ScanQRController" as ScanQRController
+database "Supabase" as Database
+
+VehicleOwner -> TicketDetailsView: openTicketDetailsView()
+TicketDetailsView -> TicketDetailsController: getTicketDetails()
+TicketDetailsController -> Database: getTicketDetails()
+TicketDetailsController -> Database: listenRealtimeTicketChanges()
+Database -> TicketDetailsController: ticketDetails
+TicketDetailsController -> TicketDetailsView: updateTicketDetailsView()
+TicketDetailsView -> VehicleOwner: showTicketDetails()
+
+VehicleOwner -> ScanQRView: scanQRCode()
+ScanQRView -> ScanQRController: scanQRCode()
+ScanQRController -> ScanQRController: validateQRCode()
+alt QR code is valid
+  ScanQRController -> Database: updateTicket()
+  Database -> ScanQRController: ticketUpdated
+  ScanQRController -> ScanQRView: updateScanQRView()
+
+  Database -> TicketDetailsController: ticketUpdated
+  TicketDetailsController -> TicketDetailsView: showTicketStatusDialog()
+  TicketDetailsView -> VehicleOwner: showTicketStatusDialog()
+else QR code is invalid
+  ScanQRController -> Database: Send Broadcast Message
+  Database -> TicketDetailsController: Broadcast Message
+  TicketDetailsController -> TicketDetailsView: showInvalidQRCodeDialog()
+  TicketDetailsView -> VehicleOwner: showInvalidQRCodeDialog()
+end
+
+@enduml
