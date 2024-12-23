@@ -48,29 +48,7 @@ class Ticket {
   -updated_at: Timestamp
 }
 
-class Notification {
-  -id: UUID : PK
-  -user_id: UUID : FK
-  -notification_type: NotificationType
-  -notification_status: NotificationStatus
-  -message: String
-  -created_at: Timestamp
-  -updated_at: Timestamp
-}
-
-class Feedback {
-  -id: UUID : PK
-  -user_id: UUID : FK
-  -feedback_type: FeedbackType
-  -feedback_status: FeedbackStatus
-  -message: String
-  -created_at: Timestamp
-  -updated_at: Timestamp
-}
-
 Account --{ Ticket
-Account -left-{ Notification
-Account --{ Feedback
 Account -right-{ Parking
 
 Parking --{ Ticket
