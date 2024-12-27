@@ -28,11 +28,6 @@ class User {
   -account_id: UUID : FK
 }
 
-class Admin {
-  -admin_id: UUID : PK
-  -account_id: UUID : FK
-}
-
 class ParkingEmployee {
   -employee_id: UUID : PK
   -account_id: UUID : FK
@@ -55,7 +50,6 @@ class ParkingOwner {
 }
 
 Account <|-- User : Inheritance
-Account <|-- Admin : Inheritance
 Account <|-left- ParkingEmployee : Inheritance
 Account <|-- ParkingOwner : Inheritance
 
