@@ -11,6 +11,7 @@ actor "Chủ phương tiện" as VehicleOwner
 rectangle "Tổng quan" as GeneralDiagram {
   'ParkingStaff'
     ParkingStaff -- (Tìm kiếm và kiểm tra vé đỗ xe)
+    ParkingStaff -- (Nhận thông báo)
   'ParkingOwner'
     ParkingOwner -- (Quản lý bãi đỗ)
     ParkingOwner -- (Tìm kiếm và kiểm tra vé đỗ xe)
