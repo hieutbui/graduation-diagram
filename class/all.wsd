@@ -1,0 +1,172 @@
+@startuml class_all
+
+class Account {
+  -id: UUID : PK
+  -account_type: AccountType
+  -password: String
+  -email: String
+  -name: String
+  -phone: String
+  -username: String?
+  -avatar: String?
+  -gender: Gender?
+  -date_of_birth: Date?
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findAccountById(id: UUID): Account
+  +login(\n   username: String, \n   password: String\n): Account
+  +logout(id: UUID): Boolean
+  +register(account: Account): Account
+  +update(account: Account): Account
+  +delete(id: UUID): Boolean
+  +forgotPassword(email: String): Boolean
+}
+
+class User {
+  -user_id: UUID : PK
+  -account_id: UUID : FK
+}
+
+class Admin {
+  -admin_id: UUID : PK
+  -account_id: UUID : FK
+}
+
+class ParkingEmployee {
+  -employee_id: UUID : PK
+  -account_id: UUID : FK
+  -parking_id: UUID : FK
+  -working_status: WorkingStatus
+  -labor_type: LaborType
+  -shift_start: Timestamp
+  -shift_end: Timestamp
+  -salary: Double
+  +findEmployeeByParkingId(\n   parking_id: UUID\n): ParkingEmployee
+  +updateEmployee(\n   employee: ParkingEmployee\n): ParkingEmployee
+}
+
+class ParkingOwner {
+  -owner_id: UUID : PK
+  -account_id: UUID : FK
+  -parking_id: UUID[ ]
+  -business_name: String
+  +findOwnerByParkingId(\n   parking_id: UUID\n): ParkingOwner
+}
+
+class Parking {
+  -id: UUID : PK
+  -owner_id: UUID : FK
+  -employees: UUID[ ]
+  -parking_name: String
+  -address: String
+  -latitude: Double
+  -longitude: Double
+  -total_slot: Integer
+  -available_slot: Integer
+  -price_per_hour: ShiftPrice[ ]
+  -price_per_day: Double?
+  -price_per_month: Double?
+  -price_per_year: Double?
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findParkingById(id: UUID): Parking
+  +findParkingByLocation(\n   latitude: Double, \n   longitude: Double\n): Parking
+  +updateParking(parking: Parking): Parking
+  +deleteParking(id: UUID): Boolean
+  +createParking(parking: Parking): Parking
+}
+
+class ShiftPrice {
+  -shift_price_id: UUID : PK
+  -parking_id: UUID : FK
+  -shift_type: ShiftType
+  -shift_name: String
+  -shift_start: Timestamp
+  -shift_end: Timestamp
+  -price: Double
+  -created_at: Timestamp
+  -updated_at: Timestamp
+  +findShiftPriceByParkingId(\n   parking_id: UUID\n): ShiftPrice
+  +updateShiftPrice(\n   shift_price: ShiftPrice\n): ShiftPrice
+  +createShiftPrice(\n   shift_price: ShiftPrice\n): ShiftPrice
+  +deleteShiftPrice(\n   shift_price_id: UUID\n): Boolean
+}
+
+class Ticket {
+  -id: UUID : PK
+  -parking_id: UUID : FK
+  -user_id: UUID : FK
+  -vehicle_id: UUID : FK
+  -payment_id: UUID : FK
+  -ticket_status: TicketStatus
+  -start_time: Timestamp
+  -end_time: Timestamp
+  -extra_time: Integer
+  -expired: Boolean
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findTicketById(id: UUID): Ticket
+  +findTicketByUserId(id: UUID): Ticket
+  +findTicketByParkingId(id: UUID): Ticket
+  +findTicketByVehicleId(id: UUID): Ticket
+  +findTicketByPaymentId(id: UUID): Ticket
+  +updateTicket(ticket: Ticket): Ticket
+  +deleteTicket(id: UUID): Boolean
+  +createTicket(ticket: Ticket): Ticket
+  +addExtraTime(id: UUID, extra_time: Timestamp): Ticket
+  +payTicket(id: UUID, payment_id: UUID): Ticket
+  +cancelTicket(id: UUID): Boolean
+}
+
+class Vehicle {
+  -vehicle_id: UUID : PK
+  -user_id: UUID : FK
+  -vehicle_type: VehicleType
+  -license_plate: String
+  -brand: String
+  -model: String
+  -color: String
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findVehicleById(id: UUID): Vehicle
+  +updateVehicle(vehicle: Vehicle): Vehicle
+  +deleteVehicle(id: UUID): Boolean
+  +createVehicle(vehicle: Vehicle): Vehicle
+}
+
+class Payment {
+  -payment_id: UUID : PK
+  -ticket_id: UUID : FK
+  -payment_type: PaymentType
+  -payment_status: PaymentStatus
+  -fees: Double
+  -amount: Double
+  -created_at: Timestamp
+  -updated_at: Timestamp
+
+  +findPaymentById(id: UUID): Payment
+  +updatePayment(payment: Payment): Payment
+  +deletePayment(id: UUID): Boolean
+  +createPayment(payment: Payment): Payment
+}
+
+Account --{ Ticket
+Account -right-{ Parking
+
+Parking --{ Ticket
+
+Ticket "1"-right-"1" Vehicle : Composition
+Ticket "1"-down-"1" Payment : Composition
+
+Parking "1"-right-"n" ShiftPrice : Composition
+
+Account <|-- User : Inheritance
+Account <|-- Admin : Inheritance
+Account <|-left- ParkingEmployee : Inheritance
+Account <|-- ParkingOwner : Inheritance
+
+@enduml
