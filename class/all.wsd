@@ -28,11 +28,6 @@ class User {
   -account_id: UUID : FK
 }
 
-class Admin {
-  -admin_id: UUID : PK
-  -account_id: UUID : FK
-}
-
 class ParkingEmployee {
   -employee_id: UUID : PK
   -account_id: UUID : FK
@@ -165,7 +160,6 @@ Ticket "1"-down-"1" Payment : Composition
 Parking "1"-right-"n" ShiftPrice : Composition
 
 Account <|-- User : Inheritance
-Account <|-- Admin : Inheritance
 Account <|-left- ParkingEmployee : Inheritance
 Account <|-- ParkingOwner : Inheritance
 
