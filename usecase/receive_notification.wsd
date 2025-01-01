@@ -3,17 +3,19 @@
 left to right direction
 skinparam packageStyle rect
 
-actor "Hệ thống" as Admin
 actor "Chủ phương tiện" as VehicleOwner
 actor "Chủ bãi đỗ" as ParkingOwner
+actor "Nhân viên bãi đố" as ParkingStaff
 
-rectangle "Nhận/Gửi phản hồi và thông báo" as ReceiveNotification {
-  'Admin'
-    Admin -- (Gửi thông báo)
+rectangle "Nhận thông báo" as ReceiveNotification {
   'VehicleOwner'
-    (Nhận thông báo) -- VehicleOwner
+  (Nhận thông báo) -- VehicleOwner
   'ParkingOwner'
-    (Nhận thông báo) -- ParkingOwner
+  (Nhận thông báo) -- ParkingOwner
+  ParkingOwner -- (Gửi thông báo)
+  'ParkingStaff'
+  (Nhận thông báo) -- ParkingStaff
+  ParkingStaff -- (Gửi thông báo)
 }
 
 @enduml
