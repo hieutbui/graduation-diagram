@@ -13,6 +13,14 @@ class Account {
   -date_of_birth: Date?
   -created_at: Timestamp
   -updated_at: Timestamp
+
+  +findAccountById(id: UUID): Account
+  +login(\n   username: String, \n   password: String\n): Account
+  +logout(id: UUID): Boolean
+  +register(account: Account): Account
+  +update(account: Account): Account
+  +delete(id: UUID): Boolean
+  +forgotPassword(email: String): Boolean
 }
 
 class Parking {
@@ -31,21 +39,41 @@ class Parking {
   -price_per_year: Double?
   -created_at: Timestamp
   -updated_at: Timestamp
+
+  +findParkingById(id: UUID): Parking
+  +findParkingByLocation(\n   latitude: Double, \n   longitude: Double\n): Parking
+  +updateParking(parking: Parking): Parking
+  +deleteParking(id: UUID): Boolean
+  +createParking(parking: Parking): Parking
 }
 
 class Ticket {
   -id: UUID : PK
   -parking_id: UUID : FK
   -user_id: UUID : FK
-  -vehicle_id: UUID : FK
   -payment_id: UUID : FK
   -ticket_status: TicketStatus
   -start_time: Timestamp
   -end_time: Timestamp
-  -extra_time: Integer
-  -expired: Boolean
+  -entry_time: Timestamp
+  -exit_time: Timestamp
+  -days: Integer
+  -hours: Integer
+  -total: Float
   -created_at: Timestamp
   -updated_at: Timestamp
+
+  +findTicketById(id: UUID): Ticket
+  +findTicketByUserId(id: UUID): Ticket
+  +findTicketByParkingId(id: UUID): Ticket
+  +findTicketByVehicleId(id: UUID): Ticket
+  +findTicketByPaymentId(id: UUID): Ticket
+  +updateTicket(ticket: Ticket): Ticket
+  +deleteTicket(id: UUID): Boolean
+  +createTicket(ticket: Ticket): Ticket
+  +addExtraTime(id: UUID, extra_time: Timestamp): Ticket
+  +payTicket(id: UUID, payment_id: UUID): Ticket
+  +cancelTicket(id: UUID): Boolean
 }
 
 Account --{ Ticket

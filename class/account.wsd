@@ -32,8 +32,6 @@ class ParkingEmployee {
   -employee_id: UUID : PK
   -account_id: UUID : FK
   -parking_id: UUID : FK
-  -working_status: WorkingStatus
-  -labor_type: LaborType
   -shift_start: Timestamp
   -shift_end: Timestamp
   -salary: Double
@@ -45,12 +43,23 @@ class ParkingOwner {
   -owner_id: UUID : PK
   -account_id: UUID : FK
   -parking_id: UUID[ ]
-  -business_name: String
   +findOwnerByParkingId(\n   parking_id: UUID\n): ParkingOwner
+}
+
+class EmployeeAttendance {
+  -id: UUID : PK
+  -employee_id: UUID : FK
+  -date: Date
+  -clock_in: Timestamp
+  -clock_out: Timestamp
+  -created_at: Timestamp
+  +findAttendanceByEmployeeId(\n   employee_id: UUID\n): EmployeeAttendance
+  +updateAttendance(\n   attendance: EmployeeAttendance\n): EmployeeAttendance
 }
 
 Account <|-- User : Inheritance
 Account <|-left- ParkingEmployee : Inheritance
 Account <|-- ParkingOwner : Inheritance
+ParkingEmployee "1"--"n" EmployeeAttendance : Composition
 
 @enduml

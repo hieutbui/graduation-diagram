@@ -32,8 +32,6 @@ class ParkingEmployee {
   -employee_id: UUID : PK
   -account_id: UUID : FK
   -parking_id: UUID : FK
-  -working_status: WorkingStatus
-  -labor_type: LaborType
   -shift_start: Timestamp
   -shift_end: Timestamp
   -salary: Double
@@ -93,13 +91,15 @@ class Ticket {
   -id: UUID : PK
   -parking_id: UUID : FK
   -user_id: UUID : FK
-  -vehicle_id: UUID : FK
   -payment_id: UUID : FK
   -ticket_status: TicketStatus
   -start_time: Timestamp
   -end_time: Timestamp
-  -extra_time: Integer
-  -expired: Boolean
+  -entry_time: Timestamp
+  -exit_time: Timestamp
+  -days: Integer
+  -hours: Integer
+  -total: Float
   -created_at: Timestamp
   -updated_at: Timestamp
 
@@ -119,11 +119,8 @@ class Ticket {
 class Vehicle {
   -vehicle_id: UUID : PK
   -user_id: UUID : FK
-  -vehicle_type: VehicleType
+  -vehicle_name: String
   -license_plate: String
-  -brand: String
-  -model: String
-  -color: String
   -created_at: Timestamp
   -updated_at: Timestamp
 
@@ -149,6 +146,17 @@ class Payment {
   +createPayment(payment: Payment): Payment
 }
 
+class EmployeeAttendance {
+  -id: UUID : PK
+  -employee_id: UUID : FK
+  -date: Date
+  -clock_in: Timestamp
+  -clock_out: Timestamp
+  -created_at: Timestamp
+  +findAttendanceByEmployeeId(\n   employee_id: UUID\n): EmployeeAttendance
+  +updateAttendance(\n   attendance: EmployeeAttendance\n): EmployeeAttendance
+}
+
 Account --{ Ticket
 Account -right-{ Parking
 
@@ -162,5 +170,7 @@ Parking "1"-right-"n" ShiftPrice : Composition
 Account <|-- User : Inheritance
 Account <|-left- ParkingEmployee : Inheritance
 Account <|-- ParkingOwner : Inheritance
+
+ParkingEmployee "1"--{"n" EmployeeAttendance : Composition
 
 @enduml
