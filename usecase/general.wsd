@@ -10,17 +10,23 @@ actor "Chủ phương tiện" as VehicleOwner
 
 rectangle "Tổng quan" as GeneralDiagram {
   'ParkingStaff'
-    ParkingStaff -- (Tìm kiếm và kiểm tra vé đỗ xe)
+    ParkingStaff -- (Xem vé đỗ xe)
     ParkingStaff -- (Nhận thông báo)
+    ParkingStaff -- (Quét vé đỗ xe)
   'ParkingOwner'
-    ParkingOwner -- (Quản lý bãi đỗ)
-    ParkingOwner -- (Tìm kiếm và kiểm tra vé đỗ xe)
+    ParkingOwner -- (Quản lý thông tin bãi đỗ)
+    ParkingOwner -- (Xem vé đỗ xe)
     ParkingOwner -- (Xuất dữ liệu)
     ParkingOwner -- (Nhận thông báo)
+    ParkingOwner -- (Quét vé đỗ xe)
+    ParkingOwner -- (Quản lý nhân viên)
   'VehicleOwner'
     (Nhận thông báo) - VehicleOwner
     (Quản lý thông tin) -- VehicleOwner
     (Đặt, hủy và thanh toán vé đỗ xe) -- VehicleOwner
-    (Tìm kiếm bãi đỗ và vé đỗ xe) -- VehicleOwner
+    (Tìm kiếm bãi đỗ xe) -- VehicleOwner
+    (Xem vé đỗ xe) -- VehicleOwner
+  'Ext use case'
+    (Gửi thông báo) .left.> (Quét vé đỗ xe): <<Include>>
 }
 @enduml
