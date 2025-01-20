@@ -16,17 +16,17 @@ rectangle "Tổng quan" as GeneralDiagram {
   'ParkingOwner'
     ParkingOwner -- (Quản lý thông tin bãi đỗ)
     ParkingOwner -- (Xem vé đỗ xe)
-    ParkingOwner -- (Xuất dữ liệu)
+    ParkingOwner -- (Trích Xuất dữ liệu)
     ParkingOwner -- (Nhận thông báo)
     ParkingOwner -- (Quét vé đỗ xe)
     ParkingOwner -- (Quản lý nhân viên)
   'VehicleOwner'
-    (Nhận thông báo) - VehicleOwner
-    (Quản lý thông tin) -- VehicleOwner
-    (Đặt, hủy và thanh toán vé đỗ xe) -- VehicleOwner
-    (Tìm kiếm bãi đỗ xe) -- VehicleOwner
-    (Xem vé đỗ xe) -- VehicleOwner
+    (Nhận thông báo) -- VehicleOwner
+    (Quản lý thông tin) --- VehicleOwner
+    (Đặt, hủy và thanh toán vé đỗ xe) --- VehicleOwner
+    (Tìm kiếm bãi đỗ xe) --- VehicleOwner
+    (Xem vé đỗ xe) --- VehicleOwner
   'Ext use case'
-    (Gửi thông báo) .left.> (Quét vé đỗ xe): <<Include>>
+    (Gửi thông báo) .up.> (Quét vé đỗ xe): <<Include>>
 }
 @enduml
