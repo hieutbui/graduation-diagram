@@ -157,20 +157,24 @@ class EmployeeAttendance {
   +updateAttendance(\n   attendance: EmployeeAttendance\n): EmployeeAttendance
 }
 
-Account --{ Ticket
-Account -right-{ Parking
-
-Parking --{ Ticket
-
-Ticket "1"-right-"1" Vehicle : Composition
-Ticket "1"-down-"1" Payment : Composition
-
-Parking "1"-right-"n" ShiftPrice : Composition
-
-Account <|-- User : Inheritance
+Account <|- User : Inheritance
 Account <|-left- ParkingEmployee : Inheritance
-Account <|-- ParkingOwner : Inheritance
+Account <|- ParkingOwner : Inheritance
 
-ParkingEmployee "1"--{"n" EmployeeAttendance : Composition
+User "1"-{"n" Ticket
+User "1"-{"n" Vehicle
+User "1"-{"n" Payment
+
+Parking "1"-right-{"n" Ticket
+
+Ticket "1"-up-"1" Vehicle
+Ticket "1"-right-"1" Payment
+
+Parking "1"-left-{"n" ShiftPrice
+
+ParkingEmployee "1"-left-{"n" EmployeeAttendance
+
+ParkingOwner "1"--"1" Parking
+ParkingEmployee "1"--"1" Parking
 
 @enduml
