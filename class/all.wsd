@@ -175,6 +175,6 @@ Parking "1"-left-{"n" ShiftPrice
 ParkingEmployee "1"-left-{"n" EmployeeAttendance
 
 ParkingOwner "1"--"1" Parking
-ParkingEmployee "1"--"1" Parking
+ParkingEmployee "n"}--"1" Parking
 
 @enduml
